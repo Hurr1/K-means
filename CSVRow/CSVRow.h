@@ -1,6 +1,4 @@
-#ifndef __CSVROW_H__
-#define __CSVROW_H__
-
+#pragma once
 #include <string>
 #include <vector>
 #include <fstream>
@@ -15,4 +13,3 @@ private:
     std::string            m_line;
     std::vector<double>    m_data;
 };
-#endif // __CSVROW_H__

@@ -1,7 +1,6 @@
 #include <vector>
 #include "../Node/Node.h"
 #include "../Node/Cluster.h"
-#include <SFML/Graphics.hpp>
 
 namespace algs
 {

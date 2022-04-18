@@ -3,7 +3,6 @@
 #include "CSVRow/CSVRow.h"
 #include "Node/Cluster.h"
 #include <random>
-#include <SFML/Graphics.hpp>
 
 int main(int argc, char *argv[])
 {
@@ -74,7 +73,7 @@ int main(int argc, char *argv[])
             std::cout<<"Success"<<'\n';
             return 0;
         }
-        
+
         for(auto &cl : clusters)
             cl.clearNode();
         round++;
