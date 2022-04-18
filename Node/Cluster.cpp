@@ -12,7 +12,7 @@ void Cluster::changeCoords(std::vector<double> &&newCoords)
     this->_variables = newCoords;
 }
 
-std::vector<Node> Cluster::getNodes()
+std::vector<Node> Cluster::getNodes() const
 {
     return this->clustersNodes;
 }

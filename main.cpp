@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
 
-    int clusters_number;
+    short clusters_number;
 
     if (argc - 1 == 2)
     {
@@ -42,9 +42,9 @@ int main(int argc, char *argv[])
         clusters.push_back(Cluster(data[index], i));
     }
 
-    std::vector<int> clustersBefore(clusters.size(), 0);
-    std::vector<int> clustersAfter(clusters.size(), 0);
-    int round = 0;
+    std::vector<int> clBefore(clusters.size(), 0);
+    std::vector<int> clAfter(clusters.size(), 0);
+    uint16_t round = 0;
 
     while (true)
     {
@@ -56,28 +56,30 @@ int main(int argc, char *argv[])
         }
         algs::setClustersCoords(clusters);
     
-        int index = 0;
+        std::size_t index = 0;
         for (auto &cl : clusters)
         {
-            auto cl_vec = cl.getCoords();
+            const auto cl_vec = cl.getCoords();
             std::cout<<"Cluster [" << index <<"] vector:  ";
             for (int i = 0; i < cl.size(); i++)
                 std::cout <<std::setw(10)<< std::left<< cl_vec[i] <<std::setw(3)<<std::left<< ' ';
+
             std::cout << "  Nodes count : " << cl.getNodes().size() << '\n'<<'\n';
-            clustersAfter.push_back(cl.getNodes().size());
+            clAfter.push_back(cl.getNodes().size());
             index++;
         }
-        if (std::equal(clustersAfter.begin(), clustersAfter.end(), clustersBefore.begin(), clustersBefore.end()))
+        if (std::equal(clAfter.begin(), clAfter.end(), clBefore.begin(), clBefore.end()))
         {
             std::cout<<"Clusters from <Round "<< round-1<<"> have the same vectors as Clusters from <Round "<<round<<"> "<<'\n'<<'\n';
             std::cout<<"Success"<<'\n';
             return 0;
         }
+        
         for(auto &cl : clusters)
             cl.clearNode();
         round++;
-        clustersBefore = std::move(clustersAfter);
-        clustersAfter.clear();
+        clBefore = std::move(clAfter);
+        clAfter.clear();
 
         std::cout << '\n'<<'\n';
     }

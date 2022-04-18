@@ -32,7 +32,7 @@ void Node::setColor(int color)
     this->_color = color;
 }
 
-std::size_t Node::size()
+std::size_t Node::size() const
 {
     return this->_variables.size();
 }

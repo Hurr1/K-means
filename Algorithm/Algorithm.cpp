@@ -4,7 +4,6 @@
 #include <iostream>
 #include <map>
 #include <algorithm>
-#include <tuple>
 #include <limits.h>
 #include <SFML/Graphics.hpp>
 
@@ -46,8 +45,7 @@ void algs::setColors(Node& node, std::vector<Cluster>& clusters)
         for(int j = 0; j<node.getCoords().size(); j++)
             distance += std::pow(node.at(j)-clusters[i].at(j),2);
 
-        distance = std::sqrt(distance);
-        pairs.push_back(std::make_pair(distance,i));
+        pairs.push_back(std::make_pair(std::sqrt(distance),i));
         distance = 0;
     }
     std::sort(pairs.begin(),pairs.end(),[](const auto& _1, const auto& _2){return _1 < _2;});
@@ -58,7 +56,7 @@ void algs::setClustersCoords(std::vector<Cluster> &clusters)
 {
     for(Cluster& cl__ : clusters)
     {
-        std::vector<double> newCoords(cl__.getCoords().size(),0);
+        std::vector<double> newCoords(cl__.size(),0);
         std::vector<Node> nodes = cl__.getNodes();
         if(!nodes.empty())
         {
