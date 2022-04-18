@@ -1,10 +1,38 @@
 #include "Node.h"
-void Node::changeCoords(std::vector<double> &&newCoords)
+#include <iostream>
+
+Node::Node(std::vector<double>&& coords, uint8_t color)
 {
-    this->_variables = newCoords;
+    this->_variables = coords;
+    this->_color = color;
 }
 
 Node::Node(std::vector<double>&& coords)
 {
     this->_variables = coords;
+}
+
+std::vector<double> Node::getCoords() const
+{
+    return this->_variables;
+}
+
+uint8_t Node::getColor() const 
+{
+    return this->_color;    
+}
+
+double Node::at(int index) const
+{
+    return this->_variables[index];
+}
+
+void Node::setColor(int color)
+{
+    this->_color = color;
+}
+
+std::size_t Node::size()
+{
+    return this->_variables.size();
 }
