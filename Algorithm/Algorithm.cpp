@@ -28,9 +28,8 @@ std::vector<Node> algs::createDataBase(std::ifstream &stream, uint8_t maxColor)
         std::mt19937 rng(dev());
         std::uniform_int_distribution<std::mt19937::result_type> dist6(1,maxColor);
         int index = dist6(rng);
-
         data.emplace_back(Node(std::move(attributes),index));
-        attributes.clear();
+        
     }
     return data;
 }
@@ -67,8 +66,6 @@ void algs::setClustersCoords(std::vector<Cluster> &clusters)
                     newCoords[i] += nodesCoords[i];
                 }
             }
-            
-
             std::for_each(newCoords.begin(),newCoords.end(),[size](double &value){value /= size;});
 
             cl__.changeCoords(std::move(newCoords));
