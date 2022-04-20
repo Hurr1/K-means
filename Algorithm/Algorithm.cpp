@@ -56,6 +56,7 @@ void algs::setClustersCoords(std::vector<Cluster> &clusters)
     {
         std::vector<double> newCoords(cl__.size(),0);
         std::vector<Node> nodes = cl__.getNodes();
+        int size = nodes.size();
         if(!nodes.empty())
         {
             for(const Node& node : nodes)
@@ -66,7 +67,7 @@ void algs::setClustersCoords(std::vector<Cluster> &clusters)
                     newCoords[i] += nodesCoords[i];
                 }
             }
-            int size = nodes.size();
+            
 
             std::for_each(newCoords.begin(),newCoords.end(),[size](double &value){value /= size;});
 
