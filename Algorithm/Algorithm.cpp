@@ -2,11 +2,10 @@
 #include "../CSVRow/CSVRow.h"
 #include <random>
 #include <iostream>
-#include <map>
 #include <algorithm>
 #include <limits.h>
-#include <SFML/Graphics.hpp>
-
+#include <queue>
+#include <set>
 
 
 std::istream& operator>>(std::istream& str, CSVRow& data)
@@ -39,17 +38,16 @@ std::vector<Node> algs::createDataBase(std::ifstream &stream, uint8_t maxColor)
 void algs::setColors(Node& node, std::vector<Cluster>& clusters)
 {
     double distance;
-    std::vector<std::pair<double,int>> pairs;
+    std::set<std::pair<double,int>,std::less<std::pair<double,int>>> set;
     for(int i = 0; i<clusters.size();i++)
     {
         for(int j = 0; j<node.getCoords().size(); j++)
             distance += std::pow(node.at(j)-clusters[i].at(j),2);
 
-        pairs.push_back(std::make_pair(std::sqrt(distance),i));
+        set.insert(std::make_pair(std::sqrt(distance),i));
         distance = 0;
     }
-    std::sort(pairs.begin(),pairs.end(),[](const auto& _1, const auto& _2){return _1 < _2;});
-    clusters[pairs[0].second].push_back(node);
+    clusters[set.begin()->second].push_back(node);
 }
 
 void algs::setClustersCoords(std::vector<Cluster> &clusters)
