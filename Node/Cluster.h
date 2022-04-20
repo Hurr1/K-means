@@ -13,5 +13,6 @@ public:
     void clearNode();
 
 private:
+    //Not a single-responsibility principle :/
     std::vector<Node> clustersNodes;
 };
