@@ -3,7 +3,7 @@
 
 Node::Node(std::vector<double>&& coords, uint8_t color)
 {
-    this->_variables = coords;
+    this->_variables = std::move(coords);
     this->_color = color;
 }
 
